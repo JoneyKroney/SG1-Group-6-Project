@@ -1,0 +1,26 @@
+this query was given to chat gpt to create the function GetTextFileName
+
+
+
+create the python function GetTextFileName according to these specfications
+
+"This section describes how SG1 prompts the user for the name of a file. For the rest of the SG1 project,
+you are prohibited from using any AI to write code. However, for this particular piece of SG1, you are
+REQUIRED to use ChatGPT’s help to write a Python 3 function. We’ll call the function GetTextFileName.
+The function takes no input parameters, and returns a string which ends in “.txt”.
+The function GetTextFileName should prompt the user for the name of a file. The file name should finish
+with “.TXT”. (The case of the letters in “txt” should not matter, and there shouldn’t be quote marks.) If
+the filename does NOT end in “.txt”, GetTextFileName should give a descriptive error message and
+reprompt. If the user enters a null string, GetTextFileName should give a descriptive error message and
+reprompt. If your group thinks of other things the user might do wrong when entering a Windows 11
+filename, your GetTextFileName should protect against those problems as well, again using a precise
+descriptive error message before reprompting. When the user has supplied a name that follows the rules
+for a Windows 11 file name the ends in .txt, GetTextFileName should return that filename as a string to
+the caller.
+As part of what you and your teammates hand in for SG1, you will make a report about using AI to write
+GetTextFileName. More on that report is listed below. In your internal SG1 code comments, you must
+alert a human reader that this function was developed using ChatGPT."
+
+
+
+
