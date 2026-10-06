@@ -65,14 +65,80 @@ def GetTextFileName():
 
         return filename
     
+def ValidateBinaryFile(file):
+    numberOfLines = 0
+    includesNon0or1 = False
+    lineLessThan20Chars = False
+    linesHaveDifferingAmmountOfCharacters = False
+    numberOfCharsPerLine = -1
+
+    for line in file:
+        
+        lineWithoutEndline = line.rstrip("\r\n")
+
+        if(numberOfCharsPerLine == -1):
+            numberOfCharsPerLine = len(lineWithoutEndline) 
+
+        
+        if(len(lineWithoutEndline) < 20):
+            lineLessThan20Chars = True
+        
+        if(len(lineWithoutEndline) != numberOfCharsPerLine):
+            linesHaveDifferingAmmountOfCharacters = True
+
+        if any(c not in "01" for c in lineWithoutEndline):
+            includesNon0or1 = True
+        
+        numberOfLines += 1
+
+        
+    if(includesNon0or1):
+        print("File contains non 1 or 0 characters")
+        input("Press Enter to continue...")
+        return False
+    elif(lineLessThan20Chars):
+        print("File contains line with less than 20 characters")
+        input("Press Enter to continue...")
+        return False
+    elif(linesHaveDifferingAmmountOfCharacters):
+        print("File contains lines with differing ammounts of characters")
+        input("Press Enter to continue...")
+        return False
+    elif(numberOfLines < 10):
+        print("File contains less than 10 lines")
+        input("Press Enter to continue...")
+        return False
+
+    return True
+    
+    
+    
+inputFileName = GetTextFileName()
+    
+    
+    
+print(inputFileName)
+
+try:
+    with open("./" + inputFileName, "r") as file:
+       if(ValidateBinaryFile(file) == False):
+           quit()
+                
     
     
     
     
-inputFile = GetTextFileName()
     
-    
-print(inputFile)
+except FileNotFoundError:
+    print("File not found.")
+    input("Press Enter to continue...")
+except PermissionError:
+    print("Permission denied.")
+    input("Press Enter to continue...")
+except OSError as e:
+    print(f"Could not open file: {e}")
+    input("Press Enter to continue...")
+
     
     
     
