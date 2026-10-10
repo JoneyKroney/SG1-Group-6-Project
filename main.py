@@ -15,6 +15,13 @@
 # used IMAGE2.PNG and user inputed txt file
 
 # John used Thonny and VSCode for this project
+# Sources used
+# how to open a file https://www.geeksforgeeks.org/python/how-to-read-from-a-file-in-python/
+# stack overflow article about comparing arrays https://stackoverflow.com/questions/25532983/finding-identical-rows-and-columns-in-a-numpy-array/66999181
+# stack overflow for converting image to arrays in greyscale  https://stackoverflow.com/questions/55826900/grayscale-png-to-numpy-array
+# another grey scale article https://stackoverflow.com/questions/52232068/how-to-change-an-image-to-grayscale-represented-as-a-numpy-array
+# pillow image interaction https://pillow.readthedocs.io/en/stable/handbook/tutorial.html
+
 
 # add "text editor you used"
 # add "dates of revisions"
