@@ -5,6 +5,8 @@
 # Major revision on on 10/5/26
 # Major revision on on 10/7/26
 # Major revision on on 10/9/26
+# Major revision on on 10/16/26
+
 # CMP SCI 4500 Introduction to the Software Profession
 
 # This program reads and validates a text file containing 0 and 1 and convert it into a black-and-white PNG image
@@ -12,7 +14,15 @@
 # Next it searches image2 for a specific pluspattern, and prints how many times the pattern appears and its coordinates
 # Lastly creates and displays that an image called image3 in which the white pixels arouund each detected pattern are changed to red
 
-# used IMAGE2.PNG and user inputed txt file
+# External files used: 
+# IMAGE2.PNG  
+# binary txt file that user provides name of
+# Image1Converter.py  
+# Image2Converter.py
+
+# External files created
+# Image3.png
+# Image1.png
 
 # John used Thonny and VSCode for this project
 # Sources used
@@ -22,17 +32,17 @@
 # another grey scale article https://stackoverflow.com/questions/52232068/how-to-change-an-image-to-grayscale-represented-as-a-numpy-array
 # pillow image interaction https://pillow.readthedocs.io/en/stable/handbook/tutorial.html
 
-
-# add "text editor you used"
-# add "dates of revisions"
-# add "a description of the central data structure or structures in your program"
-# add sources you looked up
+#The main data structure is the binary array that represents image 2 where black is 0 and white is 1
 
 
 
 from PIL import Image
 import numpy as np
+from Image1Converter import Image1Converter
+from Image2Converter import Image2Converter
 
+# This is the chatgpt generated function it validates that the inputed file name is a proper file name 
+# and return the file name as a string 
 def GetTextFileName():
     # This function was developed using ChatGPT, as required by the SG1 specification.
 
@@ -214,16 +224,23 @@ def CreateImage3():
     
 # -------------- MAIN EXECUTING CODE START -------------- #
 
-    
 inputFileName = GetTextFileName()
-    
 print(inputFileName)
 
 try:
     with open("./" + inputFileName, "r") as file:
-       if(ValidateBinaryFile(file) == False):
-           quit()
-           
+        if ValidateBinaryFile(file) == False:
+            quit()
+
+    # Print the validated file, then save and display IMAGE1.PNG.
+    converter = Image1Converter(inputFileName)
+    converter.ConvertImage1()
+    
+    # Print Print provided image2.png
+    converter2 = Image2Converter()
+    converter2.ConvertImage2()
+    
+    # Search IMAGE2 and save and display IMAGE3.PNG.
     CreateImage3()
     input("Press Enter to continue...")
 
@@ -237,7 +254,7 @@ except OSError as e:
     print(f"Could not open file: {e}")
     input("Press Enter to continue...")
 
-# --------------  MAIN EXECUTING CODE END  -------------- #
+# -------------- MAIN EXECUTING CODE END -------------- #
 
     
     
