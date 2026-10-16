@@ -1,4 +1,4 @@
-# We used Python for this project.
+# We used Python via Thonny IDE for this project.
 # Worked on by CJ Keil, John Lowrie, Sharmin Akter Meera, Kavion Norman, Sidney Wittenberg
 # This project was started on 10/4/26
 # Major revision on on 10/5/26
