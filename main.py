@@ -32,14 +32,111 @@
 # another grey scale article https://stackoverflow.com/questions/52232068/how-to-change-an-image-to-grayscale-represented-as-a-numpy-array
 # pillow image interaction https://pillow.readthedocs.io/en/stable/handbook/tutorial.html
 
+# Meera used PyCharm
+
+# Image2Converter 
+# # Data structures:
+# image2 holds the grayscale image.
+# ZerosAndOnes is a two dimensional NumPy array of integers.
+# Each entry corresponds to one image pixel at [row, column].
+
+
+# Image1Converter 
+# Data structures:
+# rows is a list of strings containing the binary text lines.
+# pixel_values is a list containing brightness values:
+# 0 for black and 255 for white.
+# image1 holds the resulting Pillow image.
+
+# createimage3 
 #The main data structure is the binary array that represents image 2 where black is 0 and white is 1
 
 
 
 from PIL import Image
 import numpy as np
-from Image1Converter import Image1Converter
-from Image2Converter import Image2Converter
+
+class Image1Converter:
+    # Stores the name of the validated input file.
+    # Parameters: filename is the binary text file's name.
+    # Global variables used: None.
+    # Returns: None.
+    def __init__(self, filename):
+        self.filename = filename
+        self.image1 = None
+
+    # Prints the text, converts it to pixels, saves and displays IMAGE1.
+    # Parameters: None other than self, the current object.
+    # Global variables used: None.
+    # Returns: The Pillow image stored in self.image1.
+    # The input file must already have passed binary file validation.
+    # File errors are passed to the calling program.
+    def ConvertImage1(self):
+        # Reopen the file so reading begins at the first line.
+        # Remove only newline characters, preserving the binary data.
+        with open(self.filename, "r") as file:
+            rows = [line.rstrip("\r\n") for line in file]
+
+        # Print each text row in its original order.
+        for row in rows:
+            print(row)
+
+        width = len(rows[0])
+        height = len(rows)
+
+        # Build the pixel list from left to right, then top to bottom.
+        pixel_values = []
+        for row in rows:
+            for character in row:
+                if character == "0":
+                    pixel_values.append(0)
+                else:
+                    pixel_values.append(255)
+
+        # L mode stores one grayscale brightness value per pixel.
+        # Only 0 and 255 are used, making the image black and white.
+        self.image1 = Image.new("L", (width, height))
+        self.image1.putdata(pixel_values)
+
+        # Saving with the same filename overwrites an existing image.
+        self.image1.save("IMAGE1.PNG")
+        self.image1.show()
+
+        return self.image1
+
+
+class Image2Converter:
+    # Sets the filename and prepares the image and array attributes.
+    # Parameters: filename is the input image filename.
+    # Global variables used: None.
+    # Returns: None.
+    def __init__(self, filename="IMAGE2.png"):
+        self.filename = filename
+        self.image2 = None
+        self.ZerosAndOnes = None
+
+    # Loads and displays IMAGE2 and converts its pixels to binary values.
+    # Parameters: None other than self, the current object.
+    # Global variables used: None.
+    # Returns: The two dimensional ZerosAndOnes array.
+    # File errors are passed to the calling program.
+    def ConvertImage2(self):
+        # Grayscale uses one brightness value for each pixel.
+        with Image.open(self.filename) as image:
+            self.image2 = image.convert("L")
+
+        self.image2.show()
+
+        # Preserves the original order of the rows and columns.
+        pixels = np.array(self.image2)
+
+        # Zero becomes 0. Every nonzero brightness becomes 1.
+        self.ZerosAndOnes = (pixels != 0).astype(int)
+
+        return self.ZerosAndOnes
+
+
+
 
 # This is the chatgpt generated function it validates that the inputed file name is a proper file name 
 # and return the file name as a string 
